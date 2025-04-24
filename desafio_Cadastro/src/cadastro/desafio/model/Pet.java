@@ -12,31 +12,31 @@ public class Pet {
     private double idade;
     private double peso;
     private String raca;
+    private String nomeArquivo;
 
+    public String getNomeArquivo() {
+        return nomeArquivo;
+    }
 
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
+    }
 
     @Override
     public String toString() {
+        String idadeStr = (idade <= VALOR_INVALIDO) ? DADO_NAO_INFORMADO : (idade % 1 == 0 ? String.format("%.0f", idade) : String.format("%.1f", idade + " anos"));
+        String pesoStr = (peso <= VALOR_INVALIDO) ? DADO_NAO_INFORMADO : (peso % 1 == 0 ? String.format("%.0f", peso) : String.format("%.1f", peso + "kg"));
+        String enderecoStr = (enderecoCompleto == null) ? DADO_NAO_INFORMADO + ", " + DADO_NAO_INFORMADO + ", " + DADO_NAO_INFORMADO : enderecoCompleto.toString();
         return  "1 - " + nomeSobrenome + "\n" +
                 "2 - " + tipoDePet.getNomeTipoPet() + "\n" +
                 "3 - " + tipoDeSexo.getSexo() + "\n" +
-                "4 - " + enderecoCompleto.toString() + "\n" +
-                "5 - " + idade + " anos" + "\n" +
-                "6 - " + peso + "kg" + "\n" +
+                "4 - " + enderecoStr + "\n" +
+                "5 - " + idadeStr  + "\n" +
+                "6 - " + pesoStr + "\n" +
                 "7 - " + raca;
     }
 
     public Pet() {
-    }
-
-    public Pet(String nomeSobrenome, TipoPet tipoDePet, TipoSexo tipoDeSexo, Endereco enderecoCompleto, double idade, double peso, String raca) {
-        this.nomeSobrenome = nomeSobrenome;
-        this.tipoDePet = tipoDePet;
-        this.tipoDeSexo = tipoDeSexo;
-        this.enderecoCompleto = enderecoCompleto;
-        this.idade = idade;
-        this.peso = peso;
-        this.raca = raca;
     }
 
     public String getNomeSobrenome() {
@@ -70,12 +70,15 @@ public class Pet {
 
     public void setNomeSobrenome(String nomeSobrenome) {
         String[] partes = nomeSobrenome.trim().split("\\s+", 2);
-        if (partes.length < 2) {
+        if (nomeSobrenome.isEmpty()) {
+            this.nomeSobrenome = DADO_NAO_INFORMADO;
+        } else if (partes.length < 2) {
             throw new NomeSobrenomeException("Formato inválido, digite nome e sobrenome do seu pet");
         } else if (!nomeSobrenome.matches("^[\\p{L}\\s]+$")) {
             throw new NomeSobrenomeException("O nome completo NÃO poderá conter caracteres especiais, somente letras de A-Z");
+        } else {
+            this.nomeSobrenome = nomeSobrenome;
         }
-        this.nomeSobrenome = nomeSobrenome;
     }
 
     public void setTipoPet(TipoPet tipoDePet) {
@@ -91,7 +94,9 @@ public class Pet {
     }
 
     public void setIdade(double idade) {
-        if (idade > 20) {
+        if (idade <= 0) {
+            this.idade = -1;
+        } else if (idade > 20) {
             throw new IdadeException("Idade inválida, por favor revise o valor informado!");
         } else {
             this.idade = idade;
@@ -99,7 +104,9 @@ public class Pet {
     }
 
     public void setPeso(double peso) {
-        if (peso > 60 || peso < 0.5) {
+        if (peso <= 0) {
+            this.peso = -1;
+        } else if (peso > 60 || peso < 0.5) {
             throw new PesoException("Peso inválido, por favor revise o valor informado!");
         } else {
             this.peso = peso;
@@ -107,6 +114,14 @@ public class Pet {
     }
 
     public void setRaca(String raca) {
-        this.raca = raca;
+        if (raca == null || raca.isEmpty()) {
+            this.raca = DADO_NAO_INFORMADO;
+        } else if (!raca.matches("^[\\p{L}\\s]+$")) {
+            throw new IllegalArgumentException("Raça inválida! Use apenas letras, não são permitidos números ou caracteres especiais");
+        } else {
+            this.raca = raca;
+        }
     }
+    public static final String DADO_NAO_INFORMADO = "NÃO INFORMADO";
+    private static final double VALOR_INVALIDO = -1.0;
 }

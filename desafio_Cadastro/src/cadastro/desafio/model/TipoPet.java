@@ -1,6 +1,7 @@
 package cadastro.desafio.model;
 
 public enum TipoPet {
+    NAO_INFORMADO(0, "NÃO INFORMADO"),
     CACHORRO(1, "Cachorro"),
     GATO(2, "Gato");
 
@@ -13,12 +14,14 @@ public enum TipoPet {
     }
 
     public static TipoPet tipoPetPorNome(String nomeTipoPet) {
+        if (nomeTipoPet == null || nomeTipoPet.isEmpty()) {
+            return NAO_INFORMADO;
+        }
         for (TipoPet TipoPet : values()) {
             if (TipoPet.getNomeTipoPet().equalsIgnoreCase(nomeTipoPet.trim())) {
                 return TipoPet;
-
             }
-        } return null;
+        } return NAO_INFORMADO;
 
     }
 

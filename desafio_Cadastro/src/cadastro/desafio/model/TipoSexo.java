@@ -1,6 +1,7 @@
 package cadastro.desafio.model;
 
 public enum TipoSexo {
+    NAO_INFORMADO(0, "NÃO INFORMADO"),
     MACHO (1, "Macho"),
     FEMEA (1, "Femea");
 
@@ -13,11 +14,14 @@ public enum TipoSexo {
     }
 
     public static TipoSexo TipoSexoPorNome (String sexo) {
+        if (sexo == null || sexo.isEmpty()) {
+            return NAO_INFORMADO;
+        }
         for (TipoSexo TipoSexo : values()) {
             if (TipoSexo.getSexo().equalsIgnoreCase(sexo.trim())) {
                 return TipoSexo;
             }
-        } return null;
+        } return NAO_INFORMADO;
     }
 
     public int getValor() {
