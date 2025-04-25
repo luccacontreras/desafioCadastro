@@ -21,7 +21,8 @@ public enum TipoPet {
             if (TipoPet.getNomeTipoPet().equalsIgnoreCase(nomeTipoPet.trim())) {
                 return TipoPet;
             }
-        } return NAO_INFORMADO;
+        }
+        return NAO_INFORMADO;
 
     }
 

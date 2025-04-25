@@ -17,24 +17,27 @@ public class PetFileManager {
 
 
     public static void salvarPet(Pet pet) throws IOException {
-        LocalDateTime agora = LocalDateTime.now();
-        DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
-        String dataHora = agora.format(formatterData);
-
         Path diretorio = Paths.get(DIRETORIO_BASE);
         if (!Files.exists(diretorio)) {
             Files.createDirectory(diretorio);
         }
 
-        String nomeArquivo = dataHora + "-" + pet.getNomeSobrenome().toUpperCase().replace(" ", "");
-        String caminhoCompleto = DIRETORIO_BASE + "\\" + nomeArquivo;
+        String nomeArquivo;
+        if (pet.getNomeArquivo() != null && !pet.getNomeArquivo().isEmpty()) {
+            nomeArquivo = pet.getNomeArquivo();
+        } else {
+            LocalDateTime agora = LocalDateTime.now();
+            DateTimeFormatter formatterData = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
+            String dataHora = agora.format(formatterData);
+            nomeArquivo = dataHora + "-" + pet.getNomeSobrenome().toUpperCase().replace(" ", "");
+            pet.setNomeArquivo(nomeArquivo);
+        }
 
-        pet.setNomeArquivo(nomeArquivo);
+        String caminhoCompleto = DIRETORIO_BASE + "\\" + nomeArquivo;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(caminhoCompleto))) {
             writer.write(pet.toString());
         }
-
     }
 
     public static List<Pet> carregarTodosPets() throws IOException {

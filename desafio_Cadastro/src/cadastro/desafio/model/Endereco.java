@@ -10,6 +10,7 @@ public class Endereco {
         this.numero = numero;
         this.cidade = cidade;
     }
+
     public static final Endereco ENDERECO_NAO_INFORMADO = new Endereco(Pet.DADO_NAO_INFORMADO, -1, Pet.DADO_NAO_INFORMADO);
 
     @Override
@@ -19,7 +20,7 @@ public class Endereco {
         String ruaStr = (rua == null || rua.trim().isEmpty()) ? Pet.DADO_NAO_INFORMADO : rua;
         String cidadeStr = (cidade == null || cidade.trim().isEmpty()) ? Pet.DADO_NAO_INFORMADO : cidade;
 
-        return ruaStr + ", " + numeroStr + ", " +  cidadeStr;
+        return ruaStr + ", " + numeroStr + ", " + cidadeStr;
     }
 
     public String getCidade() {

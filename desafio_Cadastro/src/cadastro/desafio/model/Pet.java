@@ -27,11 +27,11 @@ public class Pet {
         String idadeStr = (idade <= VALOR_INVALIDO) ? DADO_NAO_INFORMADO : (idade % 1 == 0 ? String.format("%.0f", idade) : String.format("%.1f", idade + " anos"));
         String pesoStr = (peso <= VALOR_INVALIDO) ? DADO_NAO_INFORMADO : (peso % 1 == 0 ? String.format("%.0f", peso) : String.format("%.1f", peso + "kg"));
         String enderecoStr = (enderecoCompleto == null) ? DADO_NAO_INFORMADO + ", " + DADO_NAO_INFORMADO + ", " + DADO_NAO_INFORMADO : enderecoCompleto.toString();
-        return  "1 - " + nomeSobrenome + "\n" +
+        return "1 - " + nomeSobrenome + "\n" +
                 "2 - " + tipoDePet.getNomeTipoPet() + "\n" +
                 "3 - " + tipoDeSexo.getSexo() + "\n" +
                 "4 - " + enderecoStr + "\n" +
-                "5 - " + idadeStr  + "\n" +
+                "5 - " + idadeStr + "\n" +
                 "6 - " + pesoStr + "\n" +
                 "7 - " + raca;
     }
@@ -122,6 +122,7 @@ public class Pet {
             this.raca = raca;
         }
     }
+
     public static final String DADO_NAO_INFORMADO = "NÃO INFORMADO";
     private static final double VALOR_INVALIDO = -1.0;
 }

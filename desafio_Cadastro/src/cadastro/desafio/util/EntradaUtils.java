@@ -35,7 +35,9 @@ public class EntradaUtils {
     }
 
     public static double lerDoubleOuNaoInformado(Scanner sc, String prompt, double valorSentinela) {
-        System.out.println(prompt);
+        if (!prompt.isEmpty()) {
+            System.out.println(prompt);
+        }
         String linha = sc.nextLine().trim();
         if (linha.isEmpty()) {
             return valorSentinela;
@@ -43,6 +45,7 @@ public class EntradaUtils {
         try {
             return Double.parseDouble(linha);
         } catch (NumberFormatException e) {
+            System.out.println("Valor inválido. Usando valor padrão.");
             return valorSentinela;
         }
     }

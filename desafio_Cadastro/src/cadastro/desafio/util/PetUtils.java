@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class PetUtils {
 
-        public static void listarPets (List<Pet> listaPets) {
+    public static void listarPets(List<Pet> listaPets) {
         listaPets.sort(Comparator.comparing(Pet::getNomeSobrenome));
         for (int i = 0; i < listaPets.size(); i++) {
             Pet p = listaPets.get(i);

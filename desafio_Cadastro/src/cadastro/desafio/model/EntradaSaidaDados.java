@@ -4,24 +4,23 @@ import java.io.*;
 
 public class EntradaSaidaDados {
 
-
     public void incluirOpcoes() {
         try (FileWriter fw = new FileWriter("formulario.txt");
              BufferedWriter bw = new BufferedWriter(fw)) {
-                bw.write("1 - Qual o nome e sobrenome do pet?\n" +
-                        "\n" +
-                        "2 - Qual o tipo do pet (Cachorro/Gato)?\n" +
-                        "\n" +
-                        "3 - Qual o sexo do animal?\n" +
-                        "\n" +
-                        "4 - Qual endereço e bairro que ele foi encontrado?\n" +
-                        "\n" +
-                        "5 - Qual a idade aproximada do pet?\n" +
-                        "\n" +
-                        "6 - Qual o peso aproximado do pet?\n" +
-                        "\n" +
-                        "7 - Qual a raça do pet?");
-                bw.flush();
+            bw.write("1 - Qual o nome e sobrenome do pet?\n" +
+                    "\n" +
+                    "2 - Qual o tipo do pet (Cachorro/Gato)?\n" +
+                    "\n" +
+                    "3 - Qual o sexo do animal?\n" +
+                    "\n" +
+                    "4 - Qual endereço e bairro que ele foi encontrado?\n" +
+                    "\n" +
+                    "5 - Qual a idade aproximada do pet?\n" +
+                    "\n" +
+                    "6 - Qual o peso aproximado do pet?\n" +
+                    "\n" +
+                    "7 - Qual a raça do pet?");
+            bw.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
